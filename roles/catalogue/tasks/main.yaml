@@ -30,14 +30,21 @@
   # ignore_errors: true
   # ignore_unreachable: true
 
-- name: Ensure /app/db directory exists
+- name: Create /app/db directory
   ansible.builtin.file:
     path: /app/db
-    state: directory  
+    state: directory
+  
 
+- name: Copy master-data.js to target
+  ansible.builtin.copy:
+    src: master-data.js
+    dest: /app/db/master-data.js
+  
 - name: Load products
   ansible.builtin.shell: mongosh --host mongodb.daws84ss.site < /app/db/master-data.js
   when: catalogue_output.stdout | int < 0
+
 
   # ignore_errors: true
   # ignore_unreachable: true
