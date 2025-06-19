@@ -21,4 +21,4 @@
   ansible.builtin.unarchive:
     src: "/tmp/{{ component }}.zip"
     dest: /app
-    remote_src: nodejs
+    remote_src: yes
