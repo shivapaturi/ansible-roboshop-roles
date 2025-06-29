@@ -9,11 +9,13 @@
     state: started
     enabled: yes
 
-- name: Install boto3 and botocore
+- name: Ensure boto3 and botocore are installed
   pip:
     name:
       - boto3
       - botocore
+  become: yes
+
 
 - name: setp root password
   ansible.builtin.command: mysql_secure_installation --set-root-pass {{ MYSQL_ROOT_PASSWORD }}
